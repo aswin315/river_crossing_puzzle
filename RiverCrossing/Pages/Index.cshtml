@@ -3,47 +3,90 @@
 
 <h1>River Crossing Game</h1>
 
+
+
 @if (_game == null)
 {
     <button class="btn btn-primary" onclick="@(e => StartGame())">Start Game </button>
 }
 else
 {
-    <button class="btn btn-primary" onclick="@(e => StartGame())">Restart</button>
-    <p>Time started: @_game.StartTime.ToString("hh:mm")</p>
+    <div style="margin-top:30px;margin-bottom:30px;display:inline-block;">
+        <span>Rules</span>
+        <ul type="circle">
+            <li>Farmer need to be present to row the boat</li>
+            <li>Maximum of only two characters can be in the boat</li>
+            <li>If left unattended together, the fox would eat the goose</li>
+            <li>If left unattended together, the goose would eat the bean</li>
+        </ul>
+        <button class="btn btn-primary" onclick="@(e => StartGame())">New Game</button>
+    </div>
+    <p>Time started: @_game.StartTime.ToString("HH:mm:ss")</p>
 
     @if (_game.GameState.State == State.Fail)
     {
-        <p>Game Failed @_game.GameState.Reason</p>
+        var totalTime = _game.TotalTime;
+
+        <p style="background-color:red">@_game.GameState.Reason</p>
+        <p>Total time taken: @totalTime.Hours hrs:@totalTime.Minutes mins:@totalTime.Seconds secs</p>
+
     }
     else if (_game.GameState.State == State.Success)
     {
-        <p>Game successfully completed</p>
+        var totalTime = _game.TotalTime;
 
-        <p>Total time taken: @_game.TotalTime.ToString()</p>
+        <p>Game successfully completed</p>
+        <p>Total time taken: @totalTime.Hours hrs:@totalTime.Minutes mins:@totalTime.Seconds secs</p>
     }
 
     <table class="table" width="100%">
+        <colgroup>
+            <col class="bank" style="background-color: lightgray" />
+            <col class="boat" />
+            <col class="river" style="background-color:cornflowerblue" />
+            <col class="boat" />
+            <col class="bank" style="background-color: lightgray" />
+        </colgroup>
         <thead>
             <tr>
-                <th width="30%">Left Bank</th>
-                <th width="30%">
+                <th text-align="center" width="20%">Left Bank</th>
+                <th width="20%">
+                    @if (_boatState == BoatState.Left)
+                    {
+                        <span>Boat</span>
+                        @*<button class="btn btn-primary" onclick="@(e => MoveBoat())">Row to Right</button>*@
+                    }
+                </th>
+                <th width="20%" text-align="center">River</th>
+                <th width="20%">
+                    @if (_boatState == BoatState.Right)
+                    {
+                        <span>Boat</span>
+
+                        @*<button class="btn btn-primary" onclick="@(e => MoveBoat())">Row to Left</button>*@
+                    }
+                </th>
+                <th text-align="center" width="200%">Right Bank</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
                     @if (_boatState == BoatState.Left)
                     {
                         <button class="btn btn-primary" onclick="@(e => MoveBoat())">Row to Right</button>
                     }
-                </th>
-                <th width="30%">
+                </td>
+                <td></td>
+                <td>
                     @if (_boatState == BoatState.Right)
                     {
                         <button class="btn btn-primary" onclick="@(e => MoveBoat())">Row to Left</button>
                     }
-                </th>
-                <th width="30%">Right Bank</th>
+                </td>
+                <td></td>
             </tr>
-        </thead>
-        <tbody>
-
             @foreach (var character in _game.GameState.Characters)
             {
                 <tr>
@@ -61,6 +104,8 @@ else
                         }
 
                     </td>
+                    <td></td>
+
                     <td>
                         @if (character.Location == Location.Boat && _boatState == BoatState.Right)
                         {
