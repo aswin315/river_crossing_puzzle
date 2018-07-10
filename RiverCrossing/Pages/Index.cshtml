@@ -21,7 +21,6 @@ else
     {
         <p>Game successfully completed</p>
 
-        Console.WriteLine(_game.TotalTime.ToString());
         <p>Total time taken: @_game.TotalTime.ToString()</p>
     }
 
@@ -91,7 +90,6 @@ async Task StartGame()
 {
     _boatState = BoatState.Left;
     _game = await Http.PostJsonAsync<Game>("https://localhost:5001/api/Games", new { });
-    Console.WriteLine(_game.Id);
     await Refresh();
 
 }
@@ -155,7 +153,6 @@ async Task DisembarkCharacter(string characterName, Location location)
     var allCharactersCrossed = _game.GameState.Characters.All(s => s.Location == Location.RightBank);
     if (allCharactersCrossed)
     {
-        Console.WriteLine("***All Characters Crossed*****");
         _game = await Http.PutJsonAsync<Game>($"https://localhost:5001/api/Games/{_game.Id}", _game);
         await Refresh();
     }

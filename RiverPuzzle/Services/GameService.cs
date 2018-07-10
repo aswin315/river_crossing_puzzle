@@ -26,7 +26,8 @@ namespace RiverPuzzle1.Services
 
         public IList<Game> GetGames()
         {
-            return _gameContext.Games.ToList();
+            return _gameContext.Games
+                .Include(g => g.GameState).ToList();
         }
 
         public async Task<Game> CreateAsync()
