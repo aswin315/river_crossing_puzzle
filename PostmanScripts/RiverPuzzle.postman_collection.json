@@ -1,0 +1,710 @@
+{
+  "info":{
+    "_postman_id":"27ccc52f-32af-45fe-a14c-b320883feef7",
+    "name":"RiverPuzzle",
+    "schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item":[
+    {
+      "name":"UpdateGame",
+      "description":"",
+      "item":[
+        {
+          "name":"UpdateGame",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"b57c2741-cc25-498a-8e69-4f7d62cd8e18",
+                "type":"text/javascript",
+                "exec":[
+                  ""
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"5514313c-f706-486f-8be0-b4b9b805cd31",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Status code is 200\", function() {",
+                  "  pm.response.to.be.ok;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1,\n    \"startTime\": \"2018-07-09T23:37:08.1207228+01:00\",\n    \"endTime\": \"0001-01-01T00:00:00\",\n    \"totalTime\": \"-736883.23:37:08.1207228\",\n    \"gameState\": {\n        \"id\": 1,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 1,\n        \"characters\": [\n            {\n                \"name\": \"Farmer\",\n                \"id\": 1,\n                \"location\": 1,\n                \"gameStateId\": 1\n            },\n            {\n                \"name\": \"Fox\",\n                \"id\": 2,\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"name\": \"Goose\",\n                \"id\": 3,\n                \"location\": 1,\n                \"gameStateId\": 1\n            },\n            {\n                \"name\": \"Bean\",\n                \"id\": 4,\n                \"location\": 0,\n                \"gameStateId\": 1\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"UpdateGame - Returns BadRequest when not found",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"5b34654d-8f82-4456-88e3-f9cb8cb71b1d",
+                "type":"text/javascript",
+                "exec":[
+                  ""
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"3f27e767-e2d7-4f1d-9432-f35b53e17fd1",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Returns BadRequest\", function() {",
+                  "  pm.response.to.have.status(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1000,\n    \"startTime\": \"2018-07-08T14:43:44.5210014+01:00\",\n    \"totalTime\": \"0001-01-01T00:00:00\",\n    \"gameState\": {\n        \"id\": 6,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 6,\n        \"characters\": [\n            {\n                \"name\": \"Farmer\",\n                \"id\": 21,\n                \"location\": 2,\n                \"gameStateId\": 6\n            },\n            {\n                \"name\": \"Fox\",\n                \"id\": 22,\n                \"location\": 0,\n                \"gameStateId\": 6\n            },\n            {\n                \"name\": \"Goose\",\n                \"id\": 23,\n                \"location\": 0,\n                \"gameStateId\": 6\n            },\n            {\n                \"name\": \"Bean\",\n                \"id\": 24,\n                \"location\": 0,\n                \"gameStateId\": 6\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"UpdateGame - Returns BadRequest when game state id is not the same",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"15ffb62d-8579-449e-9774-e3a5a42f6638",
+                "type":"text/javascript",
+                "exec":[
+                  ""
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"3f27e767-e2d7-4f1d-9432-f35b53e17fd1",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Returns BadRequest\", function() {",
+                  "  pm.response.to.have.status(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1,\n    \"startTime\": \"2018-07-08T10:13:55.4843209\",\n    \"totalTime\": \"0001-01-01T00:00:00\",\n    \"gameState\": {\n        \"id\": 6,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 1,\n        \"characters\": [\n            {\n                \"id\": 1,\n                \"name\": \"Farmer\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Fox\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Goose\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bean\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"UpdateGame - Returns BadRequest when characters are not the same",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"ea0bdf56-5a0c-4486-baea-0cb201d0cf80",
+                "type":"text/javascript",
+                "exec":[
+                  ""
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"3f27e767-e2d7-4f1d-9432-f35b53e17fd1",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Returns BadRequest\", function() {",
+                  "  pm.response.to.have.status(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1,\n    \"startTime\": \"2018-07-08T10:13:55.4843209\",\n    \"totalTime\": \"0001-01-01T00:00:00\",\n    \"gameState\": {\n        \"id\": 1,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 1,\n        \"characters\": [\n            {\n                \"id\": 100,\n                \"name\": \"Farmer\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Fox\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Goose\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bean\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"UpdateGame - Returns BadRequest when Invalid character collection is passed",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"2e25fd63-f6f6-429f-a6d4-450da906fc89",
+                "type":"text/javascript",
+                "exec":[
+                  ""
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"f5b710f1-3309-4444-a60c-57214b194a00",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Status code is 400\", function() {",
+                  "  pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "pm.test(\"UpdateGame- Returns correct erro\", function() {",
+                  "    var jsonBody = {",
+                  "    \"GameState.Characters\": [",
+                  "        \"Invalid character collection\"",
+                  "    ]",
+                  "};",
+                  "",
+                  "    pm.response.to.have.body(jsonBody);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1,\n    \"startTime\": \"2018-07-08T21:43:06.235606\",\n    \"endTime\": \"0001-01-01T00:00:00\",\n    \"totalTime\": \"-736882.21:43:06.2356060\",\n    \"gameState\": {\n        \"id\": 1,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 1,\n        \"characters\": [\n            \n            {\n                \"id\": 2,\n                \"name\": \"Fox\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Goose\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bean\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"UpdateGame - Returns BadRequest when fox and goose in the same location",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"31f47c95-9ef7-456d-b408-24c571b00ea1",
+                "type":"text/javascript",
+                "exec":[
+                  "// const echoPostRequest = {",
+                  "//     url: \"https://localhost:5001/api/Games\",",
+                  "//     method: 'POST',",
+                  "//     header: {},",
+                  "//     body: {",
+                  "//         mode: 'raw',",
+                  "//         raw: {}",
+                  "//     }",
+                  "// };",
+                  "// pm.sendRequest(echoPostRequest, function(err, res) {",
+                  "//     pm.test(\"CreatGame pre-request script - Successfully returned a valid game\", function() {",
+                  "//         pm.expect(res.code).to.eql(201);",
+                  "//     });",
+                  "",
+                  "//     var url = require('url');",
+                  "//     var result = url.parse(res.text(), true).query;",
+                  "//     pm.environment.set(\"GameData\", result);",
+                  "// });"
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"1aaafc2e-5981-46c1-8738-d4630d60dbc2",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Status code is 200\", function() {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"UpdateGame - Updates game to failure with correct reason\", function(){",
+                  "    var responseBody = pm.response.json();",
+                  "    var gameState = responseBody.gameState;",
+                  "",
+                  "    pm.expect(gameState.state).to.equal(1);",
+                  "    pm.expect(gameState.reason).to.equal(\"Fox will eat the Goose\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1,\n    \"startTime\": \"2018-07-08T21:43:06.235606\",\n    \"endTime\": \"0001-01-01T00:00:00\",\n    \"totalTime\": \"-736882.21:43:06.2356060\",\n    \"gameState\": {\n        \"id\": 1,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 1,\n        \"characters\": [\n            {\n                \"id\": 1,\n                \"name\": \"Farmer\",\n                \"location\": 1,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Fox\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Goose\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bean\",\n                \"location\": 1,\n                \"gameStateId\": 1\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"UpdateGame - Returns BadRequest when goose and bean in the same location",
+          "event":[
+            {
+              "listen":"prerequest",
+              "script":{
+                "id":"31f47c95-9ef7-456d-b408-24c571b00ea1",
+                "type":"text/javascript",
+                "exec":[
+                  "// const echoPostRequest = {",
+                  "//     url: \"https://localhost:5001/api/Games\",",
+                  "//     method: 'POST',",
+                  "//     header: {},",
+                  "//     body: {",
+                  "//         mode: 'raw',",
+                  "//         raw: {}",
+                  "//     }",
+                  "// };",
+                  "// pm.sendRequest(echoPostRequest, function(err, res) {",
+                  "//     pm.test(\"CreatGame pre-request script - Successfully returned a valid game\", function() {",
+                  "//         pm.expect(res.code).to.eql(201);",
+                  "//     });",
+                  "",
+                  "//     var url = require('url');",
+                  "//     var result = url.parse(res.text(), true).query;",
+                  "//     pm.environment.set(\"GameData\", result);",
+                  "// });"
+                ]
+              }
+            },
+            {
+              "listen":"test",
+              "script":{
+                "id":"85e298e3-07f0-416e-bc0e-56aac6b5e5b8",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"UpdateGame- Status code is 200\", function() {",
+                  "  pm.response.to.be.ok;",
+                  "});",
+                  "",
+                  "pm.test(\"UpdateGame - Updates game to failure with correct reason\", function(){",
+                  "    var responseBody = pm.response.json();",
+                  "    var gameState = responseBody.gameState;",
+                  "",
+                  "    pm.expect(gameState.state).to.equal(1);",
+                  "    pm.expect(gameState.reason).to.equal(\"Goose will eat the Bean\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"PUT",
+            "header":[
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+            "body":{
+              "mode":"raw",
+              "raw":"{\n    \"id\": 1,\n    \"startTime\": \"2018-07-08T21:43:06.235606\",\n    \"endTime\": \"0001-01-01T00:00:00\",\n    \"totalTime\": \"-736882.21:43:06.2356060\",\n    \"gameState\": {\n        \"id\": 1,\n        \"state\": 0,\n        \"reason\": null,\n        \"gameID\": 1,\n        \"characters\": [\n            {\n                \"id\": 1,\n                \"name\": \"Farmer\",\n                \"location\": 1,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Fox\",\n                \"location\": 1,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Goose\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bean\",\n                \"location\": 0,\n                \"gameStateId\": 1\n            }\n        ]\n    }\n}"
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        }
+      ]
+    },
+    {
+      "name":"GetGame",
+      "description":"",
+      "item":[
+        {
+          "name":"Get game",
+          "event":[
+            {
+              "listen":"test",
+              "script":{
+                "id":"36a5712c-f687-4a89-a1fd-2381c4f53a34",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"GET",
+            "header":[
+
+            ],
+            "body":{
+
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        },
+        {
+          "name":"Get game - Returns Bad Request when it does not exist",
+          "event":[
+            {
+              "listen":"test",
+              "script":{
+                "id":"46bf3402-b42b-47e7-b249-045ff2b3612b",
+                "type":"text/javascript",
+                "exec":[
+                  "pm.test(\"Status code is 404\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request":{
+            "method":"GET",
+            "header":[
+
+            ],
+            "body":{
+
+            },
+            "url":{
+              "raw":"https://localhost:5001/api/Games/1000",
+              "protocol":"https",
+              "host":[
+                "localhost"
+              ],
+              "port":"5001",
+              "path":[
+                "api",
+                "Games",
+                "1000"
+              ]
+            }
+          },
+          "response":[
+
+          ]
+        }
+      ]
+    },
+    {
+      "name":"CreateGame",
+      "event":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"c5422378-d775-4e4d-b858-f1330fcfab19",
+            "type":"text/javascript",
+            "exec":[
+              "pm.test(\"CreateGame- Status code is 201\", function() {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"CreateGame- Verifies the schema is correct\", function() {",
+              "  var characterSchema = {",
+              "    \"type\": \"object\",",
+              "    \"properties\": {",
+              "      \"name\": {",
+              "        \"type\": \"string\"",
+              "      },",
+              "      \"id\": {",
+              "        \"type\": \"number\"",
+              "      },",
+              "      \"location\": {",
+              "        \"type\": \"number\"",
+              "      },",
+              "      \"gameStateId\": {",
+              "        \"type\": \"number\"",
+              "      }",
+              "    }",
+              "  };",
+              "",
+              "  var gameStateSchema = {",
+              "    \"type\": \"object\",",
+              "    \"properties\": {",
+              "      \"state\": {",
+              "        \"type\": \"number\"",
+              "      },",
+              "      \"id\": {",
+              "        \"type\": \"number\"",
+              "      },",
+              "      \"reason\": {",
+              "        \"type\": \"null\"",
+              "      },",
+              "      \"gameID\": {",
+              "        \"type\": \"number\"",
+              "      },",
+              "      \"characters\": {",
+              "        \"type\": \"array\",",
+              "        \"items\": characterSchema",
+              "",
+              "      }",
+              "    }",
+              "  };",
+              "",
+              "  var responseSchema = {",
+              "    \"type\": \"object\",",
+              "    \"properties\": {",
+              "      \"id\": {",
+              "        \"type\": \"number\"",
+              "      },",
+              "      \"startTime\": {",
+              "        \"type\": \"string\"",
+              "      },",
+              "      \"totalTime\": {",
+              "        \"type\": \"string\"",
+              "      },",
+              "      \"gameState\": gameStateSchema",
+              "    }",
+              "  };",
+              "",
+              "  var response = pm.response.json();",
+              "  var schemaIsValid = tv4.validate(response, responseSchema);",
+              "  pm.expect(schemaIsValid).to.be.true;",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request":{
+        "method":"POST",
+        "header":[
+          {
+            "key":"Content-Type",
+            "value":"application/json"
+          }
+        ],
+        "body":{
+          "mode":"raw",
+          "raw":"{}"
+        },
+        "url":{
+          "raw":"https://localhost:5001/api/Games",
+          "protocol":"https",
+          "host":[
+            "localhost"
+          ],
+          "port":"5001",
+          "path":[
+            "api",
+            "Games"
+          ]
+        }
+      },
+      "response":[
+
+      ]
+    },
+    {
+      "name":"Get all games",
+      "event":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"521a76f2-5a34-4861-96a6-7f3b1b6b0ac2",
+            "type":"text/javascript",
+            "exec":[
+              "pm.test(\"GetGames - Returns 200\", function(){",
+              "   pm.response.to.be.ok ",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request":{
+        "method":"GET",
+        "header":[
+          {
+            "key":"Content-Type",
+            "value":"application/json"
+          }
+        ],
+        "body":{
+          "mode":"raw",
+          "raw":"{\n                \"id\": 1,\n                \"name\": \"Farmer\",\n                \"location\": 1,\n                \"gameStateId\": 1\n            }"
+        },
+        "url":{
+          "raw":"https://localhost:5001/api/games",
+          "protocol":"https",
+          "host":[
+            "localhost"
+          ],
+          "port":"5001",
+          "path":[
+            "api",
+            "games"
+          ]
+        }
+      },
+      "response":[
+
+      ]
+    }
+  ]
+}
