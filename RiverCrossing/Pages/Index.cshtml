@@ -3,7 +3,6 @@
 
 <h1>River Crossing Game</h1>
 
-
 @if (_game == null)
 {
     <button class="btn btn-primary" onclick="@(e => StartGame())">Start Game </button>
@@ -24,23 +23,23 @@ else
         <p>Total time taken: @_game.TotalTime.ToString()</p>
     }
 
-    <table class="table">
+    <table class="table" width="100%">
         <thead>
             <tr>
-                <th>Left Bank</th>
-                <th>
+                <th width="30%">Left Bank</th>
+                <th width="30%">
                     @if (_boatState == BoatState.Left)
                     {
-                        <button class="btn btn-primary" onclick="@(e => MoveBoat())">Boat</button>
+                        <button class="btn btn-primary" onclick="@(e => MoveBoat())">Row to Right</button>
                     }
                 </th>
-                <th>
+                <th width="30%">
                     @if (_boatState == BoatState.Right)
                     {
-                        <button class="btn btn-primary" onclick="@(e => MoveBoat())">Boat</button>
+                        <button class="btn btn-primary" onclick="@(e => MoveBoat())">Row to Left</button>
                     }
                 </th>
-                <th>Right Bank</th>
+                <th width="30%">Right Bank</th>
             </tr>
         </thead>
         <tbody>
