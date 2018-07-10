@@ -55,7 +55,7 @@ namespace RiverPuzzle1.Tests.Services
         }
 
         [Fact]
-        public void GetGames_WhenGamesExist_ReturnsListOfGames()
+        public void GetGames_WhenGamesExist_ReturnsListOfGamesWithGameState()
         {
             // Arrange
             SetUpGame();
@@ -68,6 +68,7 @@ namespace RiverPuzzle1.Tests.Services
             // Assert
             Assert.IsAssignableFrom<IList<Game>>(result);
             Assert.NotEmpty(result);
+            Assert.NotNull(result[0].GameState);
         }
 
         [Fact]

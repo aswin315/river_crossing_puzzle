@@ -1,0 +1,111 @@
+﻿@page "/games"
+@inject HttpClient Http
+
+<h1>List of games</h1>
+
+
+@if (_games == null)
+{
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>Total Time</th>
+                <th>Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var game in _games)
+            {
+                <tr>
+                    <td>@game.GameState.State.ToString()</td>
+                    <td>@game.StartTime</td>
+                    <td>
+                        @if (game.GameState.State != State.InProgress)
+                        {
+
+
+                            @game.TotalTime
+                        }
+                    </td>
+                    <td>@game.GameState.Reason</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+List<Game> _games;
+
+
+protected override async Task OnInitAsync()
+{
+    try
+    {
+        await Refresh();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+}
+
+private async Task Refresh()
+{
+    _games = await Http.GetJsonAsync<List<Game>>($"https://localhost:5001/api/Games");
+    StateHasChanged();
+}
+
+public class Game
+{
+    public int Id { get; set; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
+    public TimeSpan TotalTime { get; set; }
+    public GameState GameState { get; set; }
+}
+
+public class GameState
+{
+    public int Id { get; set; }
+    public List<Character> Characters { get; set; }
+    public State State { get; set; }
+    public string Reason { get; set; }
+    public int GameID { get; set; }
+}
+
+public enum State
+{
+    InProgress,
+    Fail,
+    Success
+}
+
+public enum BoatState
+{
+    Left,
+    Right
+}
+public class Character
+{
+    public int Id { get; set; }
+    public Location Location { get; set; }
+    public string Name { get; set; }
+    public int GameStateId { get; set; }
+}
+
+public enum Location
+{
+    LeftBank,
+    Boat,
+    RightBank
+}
+
+}
