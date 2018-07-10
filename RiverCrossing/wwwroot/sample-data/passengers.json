@@ -1,0 +1,35 @@
+﻿{
+  "id": 2,
+  "startTime": "0001-01-01T00:00:00",
+  "totalTime": "0001-01-01T00:00:00",
+  "gameState": {
+    "id": 2,
+    "state": 0,
+    "reason": null,
+    "gameID": 2,
+    "characters": [
+      {
+        "name": "Farmer",
+        "id": 5,
+        "location": 1
+      },
+      {
+        "name": "Fox",
+        "id": 6,
+        "location": 2
+      },
+      {
+        "name": "Goose",
+        "id": 7,
+        "location": 0
+      },
+      {
+        "name": "Bean",
+        "id": 8,
+        "location": 0
+      }
+    ]
+  }
+}
+
+}

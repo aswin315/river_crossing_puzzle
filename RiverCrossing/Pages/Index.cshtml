@@ -1,0 +1,198 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<h1>River Crossing Game</h1>
+<button class="btn btn-primary">Restart</button>
+
+<p></p>
+
+@if (_game == null)
+{
+    <button class="btn btn-primary" onclick="@(e => StartGame())">Start Game </button>
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @if (_game.GameState.State == State.Fail)
+    {
+        <p>Game Failed @_game.GameState.Reason</p>
+    }
+
+    <p>Time started: @_game.StartTime.ToString("HH:MM")</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Left Bank</th>
+                <th>
+                    @if (_boatState == BoatState.Left)
+                    {
+                        <button class="btn btn-primary" onclick="@(e => MoveBoat())">Boat</button>
+                    }
+                </th>
+                <th>
+                    @if (_boatState == BoatState.Right)
+                    {
+                        <button class="btn btn-primary" onclick="@(e => MoveBoat())">Boat</button>
+                    }
+                </th>
+                <th>Right Bank</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var character in _game.GameState.Characters)
+            {
+                <tr>
+                    <td>
+                        @if (character.Location == Location.LeftBank)
+                        {
+                            <button class="btn btn-primary" id=@character.Name onclick="@(e => AddCharacterToBoat(character.Name))">@character.Name </button>
+                        }
+                    </td>
+                    <td>
+                        @if (character.Location == Location.Boat && _boatState == BoatState.Left)
+                        {
+                            @character.Name
+                            <button class="btn btn-primary" onclick="@(e => DisembarkCharacter(character.Name, Location.LeftBank))"><<<</button>
+                            @*<button class="btn btn-primary" onclick="@(e => DisembarkCharacter(character.Name, Location.RightBank))">>>></button>*@
+                        }
+
+                    </td>
+                    <td>
+                        @if (character.Location == Location.Boat && _boatState == BoatState.Right)
+                        {
+                            @character.Name
+                            @*<button class="btn btn-primary" onclick="@(e => DisembarkCharacter(character.Name, Location.LeftBank))"><<<</button>*@
+                            <button class="btn btn-primary" onclick="@(e => DisembarkCharacter(character.Name, Location.RightBank))">>>></button>
+                        }
+                    </td>
+                    <td>
+                        @if (character.Location == Location.RightBank)
+                        {
+                            <button class="btn btn-primary" id=@character.Name onclick="@(e => AddCharacterToBoat(character.Name))">@character.Name </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+    Game _game;
+    BoatState _boatState;
+
+    async Task StartGame()
+    {
+        _boatState = BoatState.Left;
+        _game = await Http.PostJsonAsync<Game>("https://localhost:5001/api/Games", new { });
+        Console.WriteLine(_game.Id);
+        await Refresh();
+
+    }
+    protected override async Task OnInitAsync()
+    {
+        try
+        {
+            await Refresh();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    private async Task Refresh()
+    {
+        var id = _game.Id;
+        _game = await Http.GetJsonAsync<Game>($"https://localhost:5001/api/Games/{id}");
+        StateHasChanged();
+    }
+
+    void AddCharacterToBoat(string characterName)
+    {
+        if (_game.GameState.Characters.Count<Character>(e => e.Location == Location.Boat) >= 2)
+        {
+            return;
+        }
+        _game.GameState.Characters.Single<Character>(e => e.Name == characterName).Location = Location.Boat;
+    }
+
+    async Task MoveBoat()
+    {
+        _game = await Http.PutJsonAsync<Game>($"https://localhost:5001/api/Games/{_game.Id}", _game);
+        Console.WriteLine("***Hit***");
+
+        if (_game.GameState.State == State.InProgress)
+        {
+            Console.WriteLine("***Hit***");
+            if (_boatState == BoatState.Left)
+            {
+                _boatState = BoatState.Right;
+            }
+            else
+            {
+                _boatState = BoatState.Left;
+
+            }
+        }
+
+        await Refresh();
+    }
+
+    async Task DisembarkCharacter(string characterName, Location location)
+    {
+
+
+        _game.GameState.Characters.Single<Character>(e => e.Name == characterName).Location = location;
+        // _game = await Http.PutJsonAsync<Game>($"https://localhost:5001/api/Games/{_game.Id}", _game);
+        await Refresh();
+    }
+
+    public class Game
+    {
+        public int Id { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public TimeSpan TotalTime { get; set; }
+        public GameState GameState { get; set; }
+    }
+
+    public class GameState
+    {
+        public int Id { get; set; }
+        public List<Character> Characters { get; set; }
+        public State State { get; set; }
+        public string Reason { get; set; }
+        public int GameID { get; set; }
+    }
+
+    public enum State
+    {
+        InProgress,
+        Fail,
+        Success
+    }
+
+    public enum BoatState
+    {
+        Left,
+        Right
+    }
+    public class Character
+    {
+        public int Id { get; set; }
+        public Location Location { get; set; }
+        public string Name { get; set; }
+        public int GameStateId { get; set; }
+    }
+
+    public enum Location
+    {
+        LeftBank,
+        Boat,
+        RightBank
+    }
+
+}
