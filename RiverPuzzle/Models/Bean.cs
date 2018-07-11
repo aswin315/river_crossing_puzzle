@@ -7,12 +7,15 @@ namespace RiverPuzzle1.Models
     {
         public override string Name => "Bean";
 
-        public override IList<string> NotCompatibleCharacters()
+        public override IDictionary<string, string> NotCompatibleCharacters
         {
-            return new List<string>
+            get
             {
-                "Goose"
-            };
+                return new Dictionary<string, string>()
+                {
+                    { "Goose", "Goose will eat the bean" }
+                };
+            }
         }
     }
 }

@@ -15,21 +15,14 @@ namespace RiverPuzzle1.Models
 
         public GameState GameState { get; set; }
 
-        public virtual bool CanCoexist(object obj)
+        public string CanCoexist(object obj)
         {
             var otherCharacter = obj as Character;
-            var isNotCompatible = NotCompatibleCharacters().Contains(otherCharacter.Name);
-            if (isNotCompatible)
-            {
-                return false;
-            }
-            return true;
+            NotCompatibleCharacters.TryGetValue(otherCharacter.Name, out string reason);
+            return reason;
         }
 
-        public virtual IList<string> NotCompatibleCharacters()
-        {
-            return new List<string>();
-        }
+        public virtual IDictionary<string, string> NotCompatibleCharacters => new Dictionary<string, string>();
     }
 
     public enum Location

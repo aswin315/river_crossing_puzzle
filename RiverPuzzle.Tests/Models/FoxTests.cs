@@ -15,12 +15,12 @@ namespace RiverPuzzle1.Tests.Models
             var character = new Fox();
 
             // Act
-            var result = character.NotCompatibleCharacters();
+            var result = character.NotCompatibleCharacters;
 
             // Assert
-            Assert.IsType<List<string>>(result);
+            Assert.IsType<Dictionary<string, string>>(result);
             Assert.Equal(1, result.Count);
-            Assert.Equal("Goose",result[0]);
+            Assert.Equal("Fox will eat the goose", result["Goose"]);
         }
     }
 }

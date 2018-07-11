@@ -1,7 +1,5 @@
 ﻿using RiverPuzzle1.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace RiverPuzzle1.Tests.Models
@@ -15,12 +13,12 @@ namespace RiverPuzzle1.Tests.Models
             var character = new Bean();
 
             // Act
-            var result = character.NotCompatibleCharacters();
+            var result = character.NotCompatibleCharacters;
 
             // Assert
-            Assert.IsType<List<string>>(result);
+            Assert.IsType<Dictionary<string, string>>(result);
             Assert.Equal(1, result.Count);
-            Assert.Equal("Goose", result[0]);
+            Assert.Equal("Goose will eat the bean", result["Goose"]);
         }
     }
 }

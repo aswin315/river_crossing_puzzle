@@ -38,7 +38,7 @@ namespace RiverPuzzle1.ValidationAttributes
             }
             var firstCharacter = charactersGroup[0];
             var secondCharacter = charactersGroup[1];
-            if (!firstCharacter.CanCoexist(secondCharacter))
+            if (!string.IsNullOrEmpty(firstCharacter.CanCoexist(secondCharacter)))
             {
                 ErrorMessage = $"{firstCharacter.Name} and {secondCharacter.Name} cannot be in the same location";
                 return false;
