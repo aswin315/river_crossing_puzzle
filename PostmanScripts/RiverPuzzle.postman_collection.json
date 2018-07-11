@@ -1,13 +1,13 @@
 {
   "info":{
-    "_postman_id":"27ccc52f-32af-45fe-a14c-b320883feef7",
+    "_postman_id":"28377683-4b91-4e47-861e-28823fadf24e",
     "name":"RiverPuzzle",
     "schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item":[
     {
       "name":"UpdateGame",
-      "description":"",
+      "description":null,
       "item":[
         {
           "name":"UpdateGame",
@@ -332,7 +332,7 @@
             {
               "listen":"test",
               "script":{
-                "id":"1aaafc2e-5981-46c1-8738-d4630d60dbc2",
+                "id":"dbfa4c2e-8386-4f03-95ce-d19ccd3134cb",
                 "type":"text/javascript",
                 "exec":[
                   "pm.test(\"UpdateGame- Status code is 200\", function() {",
@@ -344,7 +344,7 @@
                   "    var gameState = responseBody.gameState;",
                   "",
                   "    pm.expect(gameState.state).to.equal(1);",
-                  "    pm.expect(gameState.reason).to.equal(\"Fox will eat the Goose\");",
+                  "    pm.expect(gameState.reason).to.equal(\"Fox will eat the goose\");",
                   "});"
                 ]
               }
@@ -413,7 +413,7 @@
             {
               "listen":"test",
               "script":{
-                "id":"85e298e3-07f0-416e-bc0e-56aac6b5e5b8",
+                "id":"da732dd0-20f8-410c-8cf0-f7f0f705fb2d",
                 "type":"text/javascript",
                 "exec":[
                   "pm.test(\"UpdateGame- Status code is 200\", function() {",
@@ -425,7 +425,7 @@
                   "    var gameState = responseBody.gameState;",
                   "",
                   "    pm.expect(gameState.state).to.equal(1);",
-                  "    pm.expect(gameState.reason).to.equal(\"Goose will eat the Bean\");",
+                  "    pm.expect(gameState.reason).to.equal(\"Goose will eat the bean\");",
                   "});"
                 ]
               }
@@ -465,7 +465,7 @@
     },
     {
       "name":"GetGame",
-      "description":"",
+      "description":null,
       "item":[
         {
           "name":"Get game",
@@ -489,7 +489,8 @@
 
             ],
             "body":{
-
+              "mode":"raw",
+              "raw":""
             },
             "url":{
               "raw":"https://localhost:5001/api/Games/1",
@@ -531,7 +532,8 @@
 
             ],
             "body":{
-
+              "mode":"raw",
+              "raw":""
             },
             "url":{
               "raw":"https://localhost:5001/api/Games/1000",
