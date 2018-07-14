@@ -1,8 +1,6 @@
 ﻿using RiverPuzzle1.Models;
 using RiverPuzzle1.ValidationAttributes;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace RiverPuzzle1.Tests.ValidationAttributes
@@ -87,7 +85,7 @@ namespace RiverPuzzle1.Tests.ValidationAttributes
 
             // Assert
             Assert.False(result);
-            Assert.Equal("Fox and Goose cannot be in the same location", attribute.ErrorMessage);
+            Assert.Equal("Fox will eat the goose", attribute.ErrorMessage);
         }
 
         [Fact]
@@ -108,7 +106,7 @@ namespace RiverPuzzle1.Tests.ValidationAttributes
 
             // Assert
             Assert.False(result);
-            Assert.Equal("Goose and Bean cannot be in the same location", attribute.ErrorMessage);
+            Assert.Equal("Goose will eat the bean", attribute.ErrorMessage);
         }
 
     }

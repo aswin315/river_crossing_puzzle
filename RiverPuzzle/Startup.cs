@@ -26,10 +26,10 @@ namespace RiverPuzzle1
         {
             services.AddCors(options =>            {                options.AddPolicy("CorsPolicy",                    builder =>                    builder.AllowAnyOrigin()                    .AllowAnyMethod()                    .WithExposedHeaders("content-disposition")                    .AllowAnyHeader()                    .AllowCredentials()                    .SetPreflightMaxAge(TimeSpan.FromSeconds(3600)));            });
 
-            services.AddDbContext<GameContext>(options => options.UseInMemoryDatabase("RiverPuzzle"));
-            //services.AddDbContext<GameContext>(options => options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")
-            //        ));
+            //services.AddDbContext<GameContext>(options => options.UseInMemoryDatabase("RiverPuzzle"));
+            services.AddDbContext<GameContext>(options => options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")
+                   ));
 
             // configuring services
             services.AddScoped<IGameService, GameService>();

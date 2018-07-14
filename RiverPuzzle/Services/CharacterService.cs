@@ -35,9 +35,7 @@ namespace RiverPuzzle.Services
                 return "Too many characters in the same location";
             }
 
-            var firstCharacterName = charactersGroup[0].Name;
-            var secondCharacterName = charactersGroup[1].Name;
-            return ValidateCharacters(firstCharacterName, secondCharacterName);
+            return charactersGroup[0].CanCoexist(charactersGroup[1]);
         }
 
         private string ValidateCharacters(string firstCharacterName, string secondCharacterName)

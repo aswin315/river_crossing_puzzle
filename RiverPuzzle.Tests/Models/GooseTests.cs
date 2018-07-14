@@ -13,13 +13,13 @@ namespace RiverPuzzle1.Tests.Models
             var character = new Goose();
 
             // Act
-            var result = character.NotCompatibleCharacters();
+            var result = character.NotCompatibleCharacters;
 
             // Assert
-            Assert.IsType<List<string>>(result);
+            Assert.IsType<Dictionary<string,string>>(result);
             Assert.Equal(2, result.Count);
-            Assert.Equal("Fox", result[0]);
-            Assert.Equal("Bean", result[1]);
+            Assert.Equal("Fox will eat the goose", result["Fox"]);
+            Assert.Equal("Goose will eat the bean", result["Bean"]);
         }
     }
 }

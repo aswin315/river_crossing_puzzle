@@ -13,15 +13,15 @@ namespace RiverPuzzle1.Tests.Models
             var character = new Character();
 
             // Act
-            var result = character.NotCompatibleCharacters();
+            var result = character.NotCompatibleCharacters;
 
             // Assert
-            Assert.IsType<List<string>>(result);
+            Assert.IsType<Dictionary<string,string>>(result);
             Assert.Empty(result);
         }
 
         [Fact]
-        public void CanCoexist_WhenCharactersAreFarmerAndGoose_ReturnsTrue()
+        public void CanCoexist_WhenCharactersAreFarmerAndGoose_ReturnsEmpty()
         {
             // Arrange
             var goose = new Goose();
@@ -31,11 +31,11 @@ namespace RiverPuzzle1.Tests.Models
             var result = farmer.CanCoexist(goose);
 
             // Assert
-            Assert.True(result);
+            Assert.Null(result);
         }
 
         [Fact]
-        public void CanCoexist_WhenCharacterAreFoxAndGoose_ReturnsFalse()
+        public void CanCoexist_WhenCharacterAreFoxAndGoose_ReturnsReason()
         {
             // Arrange
             var goose = new Goose();
@@ -45,7 +45,7 @@ namespace RiverPuzzle1.Tests.Models
             var result = fox.CanCoexist(goose);
 
             // Assert
-            Assert.False(result);
+            Assert.Equal("Fox will eat the goose",result);
         }
     }
 }

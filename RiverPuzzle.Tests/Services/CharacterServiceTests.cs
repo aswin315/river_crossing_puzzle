@@ -86,7 +86,7 @@ namespace RiverPuzzle.Tests.Services
             var result = characterService.Validate(characters);
 
             // Assert
-            Assert.Equal("Fox will eat the Goose", result);
+            Assert.Equal("Fox will eat the goose", result);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace RiverPuzzle.Tests.Services
             var result = characterService.Validate(characters);
 
             // Assert
-            Assert.Equal("Goose will eat the Bean", result);
+            Assert.Equal("Goose will eat the bean", result);
         }
     }
 }

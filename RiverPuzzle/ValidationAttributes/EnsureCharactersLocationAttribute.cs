@@ -17,33 +17,29 @@ namespace RiverPuzzle1.ValidationAttributes
 
             foreach(var charactersGroup in charactersBasedOnLocation )
             {
-                var validGroup = ValidateCharacterGroup(charactersGroup);
-                if(!validGroup)
+                var reason = ValidateCharacterGroup(charactersGroup);
+                if(!string.IsNullOrEmpty(reason))
                 {
+                    ErrorMessage = reason;
                     return false;
                 }
             }
             return true;
         }
 
-        private bool ValidateCharacterGroup(List<Character> charactersGroup)
+        private string ValidateCharacterGroup(List<Character> charactersGroup)
         {
             if (charactersGroup.Count == 1 || charactersGroup.Count == 4)
             {
-                return true;
+                return string.Empty;
             }
             if (charactersGroup.Count == 3)
             {
-                return false;
+                return "Too many characters in the same location";
             }
             var firstCharacter = charactersGroup[0];
             var secondCharacter = charactersGroup[1];
-            if (!firstCharacter.CanCoexist(secondCharacter))
-            {
-                ErrorMessage = $"{firstCharacter.Name} and {secondCharacter.Name} cannot be in the same location";
-                return false;
-            }
-            return true;
+            return firstCharacter.CanCoexist(secondCharacter);
         }
     }
 }
